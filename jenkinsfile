@@ -3,20 +3,21 @@ pipeline {
 
     stages {
 
-        stage('Clone Repo') {
+        stage('Clone Repository') {
             steps {
-                git 'https://github.com/your-repo/frontend.git'
+                git 'https://github.com/jyothithing/jenkins-frontend.git'
             }
         }
 
-        stage('Deploy to Nginx') {
+        stage('Give Permission') {
             steps {
-                sh '''
-                sudo rm -rf /var/www/html/*
-                sudo cp *.html /var/www/html/ || true
-                sudo cp *.css /var/www/html/ || true
-                sudo cp *.js /var/www/html/ || true
-                '''
+                sh 'chmod +x deploy.sh'
+            }
+        }
+
+        stage('Deploy Application') {
+            steps {
+                sh './deploy.sh'
             }
         }
 
