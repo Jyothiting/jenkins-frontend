@@ -5,11 +5,11 @@ pipeline {
 
         stage('Clone Repository') {
             steps {
-                git clone 'https://github.com/jyothithing/jenkins-frontend.git'
+                git 'https://github.com/jyothithing/jenkins-frontend.git'
             }
         }
 
-        stage('Give Permission') {
+        stage('Prepare Files') {
             steps {
                 sh 'chmod +x deploy.sh'
             }
@@ -17,7 +17,11 @@ pipeline {
 
         stage('Deploy Application') {
             steps {
-                sh './deploy.sh'
+                sh '''
+                sudo rm -rf /var/www/html/*
+                sudo cp -r * /var/www/html/
+                sudo systemctl restart nginx
+                '''
             }
         }
 
