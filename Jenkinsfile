@@ -5,7 +5,7 @@ pipeline {
 
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/jyothithing/jenkins-frontend.git'
+                git clone 'https://github.com/jyothithing/jenkins-frontend.git'
             }
         }
 
